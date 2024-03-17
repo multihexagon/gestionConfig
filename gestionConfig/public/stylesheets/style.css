@@ -1,6 +1,7 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: "Jura", sans-serif;
+  background-color: rgb(0, 54, 80);
 }
 
 a {
@@ -16,8 +17,9 @@ h1{
   background-color: rgba(17, 24, 39, 1);
   padding: 2rem;
   color: rgba(243, 244, 246, 1);
-  margin: auto;
-  margin-top: 5%;
+  position: fixed;
+  top: 20%;
+  left: 35%
 }
 
 .title {
@@ -54,7 +56,7 @@ h1{
 }
 
 .input-group input:focus {
-  border-color: rgba(167, 139, 250);
+  border-color: rgb(0, 54, 80);
 }
 
 .forgot {
@@ -73,13 +75,13 @@ h1{
 }
 
 .forgot a:hover, .signup a:hover {
-  text-decoration: underline rgba(167, 139, 250, 1);
+  text-decoration: underline rgb(0, 54, 80);
 }
 
 .sign {
   display: block;
   width: 100%;
-  background-color: rgba(167, 139, 250, 1);
+  background-color: rgb(0, 54, 80);
   padding: 0.75rem;
   text-align: center;
   color: rgba(17, 24, 39, 1);

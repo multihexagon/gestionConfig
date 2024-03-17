@@ -1,0 +1,10 @@
+.link{
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.5em;
+    margin: 0 10px;
+    transition: 0.3s;
+    background-color: rgb(0, 54, 80);
+    border: 1px solid #00c8ff;
+    padding: 10px;
+}

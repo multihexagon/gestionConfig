@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/landing.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jura:wght@300..700&family=Oswald:wght@200..700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Elegant Landing Page with three.js Animation</title>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        font-family: "Jura", sans-serif;
+      }
+      canvas {
+        display: block;
+      }
+      #container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: #fff;
+      }
+      h1 {
+        font-size: 4em;
+        margin-bottom: 20px;
+      }
+      p {
+        font-size: 1.5em;
+        margin-bottom: 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <h1>¡Bienvenidos!</h1>
+      <p>
+        Este es nuestro sitio para la asignatura de gestión de la configuración
+      </p>
+      <a href="/" class="link">Ingresar!</a>
+    </div>
+
+    <!-- Include three.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <script>
+      // Initialize three.js scene
+      const scene = new THREE.Scene();
+
+      // Initialize camera
+      const camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000
+      );
+      camera.position.z = 5;
+
+      // Initialize renderer
+      const renderer = new THREE.WebGLRenderer();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.body.appendChild(renderer.domElement);
+
+      // Add a rotating cube to the scene
+      const geometry = new THREE.BoxGeometry();
+      const material = new THREE.MeshBasicMaterial({ color: 800080 });
+      const cube = new THREE.Mesh(geometry, material);
+      scene.add(cube);
+
+      // Render the scene
+      function animate() {
+        requestAnimationFrame(animate);
+        cube.rotation.x += 0.01;
+        cube.rotation.y += 0.01;
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      // Update renderer size on window resize
+      window.addEventListener("resize", () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    </script>
+  </body>
+</html>
