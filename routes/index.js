@@ -1,85 +1,45 @@
-const express = require('express');
+const express = require("express");
 var router = express.Router();
-const mongoose = require('mongoose');
-const { MongoClient, ServerApiVersion } = require('mongodb');
-
-// MongoDB connection URI
-const uri = "mongodb+srv://juanpablo:juan1208@cluster0.vopkkyk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
-
-// Initialize a new MongoClient with specified server options
-const client = new MongoClient(uri, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  }
-});
-
-// Define a schema for user credentials
-const userSchema = new mongoose.Schema({
-  username: String,
-  password: String
-});
-const User = mongoose.model('User', userSchema);
-
-// Function to create a new user
-async function createUser(username, password) {
-  try {
-    await client.connect();
-    await client.db("myLoginDB").collection("users").insertOne({ username: username, password: password });
-    console.log("User created successfully.");
-  } catch (error) {
-    console.error("Error creating user:", error);
-  } finally {
-    await client.close();
-  }
-}
-
-// Function to validate user credentials for login
-async function validateUser(username, password) {
-  try {
-    await client.connect();
-    const foundUser = await User.findOne({ username: username, password: password });
-    if (foundUser) {
-      console.log("User validated successfully.");
-      return true;
-    } else {
-      console.log("Invalid username or password.");
-      return false;
-    }
-  } catch (error) {
-    console.error("Error validating user:", error);
-    return false;
-  } finally {
-    await client.close();
-  }
-}
+const User = require("../models/User");
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
-  res.render("index", { title: "Gestión de la Configuración" });
+  res.render("landing", { title: "Bienvenidos" });
 });
 
 router.get("/home", function (req, res, next) {
-  res.render("landing", { title: "Bienvenidos!" });
+  res.render("index", { title: "Gestión de la Configuración" });
 });
 
-// Route to handle new user creation
-router.post('/signup', async (req, res) => {
-  const { username, password } = req.body;
-  await createUser(username, password);
-  res.send('User created successfully!');
+router.get("/notes", function (req, res, next) {
+  res.render("notes", { title: "Notas" });
 });
 
-// Route to handle login validation
-router.post('/login', async (req, res) => {
-  const { username, password } = req.body;
-  const isValid = await validateUser(username, password);
-  if (isValid) {
-    res.send('Login successful!');
-  } else {
-    res.send('Invalid username or password.');
+router.post('/registro', async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    const newUser = new User({ username, password });
+    await newUser.save();
+    res.status(201).send('Usuario registrado exitosamente');
+  } catch (error) {
+    res.status(400).send(error.message);
   }
 });
+
+// controlador de inicio de sesión
+router.post('/login', async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    const user = await User.findOne({ username, password });
+    if (user) {
+      res.redirect('/notes');
+    } else {
+      res.status(401).send('Credenciales inválidas');
+    }
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+});
+
 
 module.exports = router;
