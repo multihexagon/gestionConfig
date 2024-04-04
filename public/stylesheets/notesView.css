@@ -13,12 +13,13 @@ h1 {
   color: darkslategrey;
 }
 
-#p{
+#p {
   font-family: 'Bungee Spice', sans-serif;
   font-size: 18px;
 
 }
-label{
+
+label {
   font-family: 'Ubuntu', sans-serif;
   font-size: 18px;
 }
@@ -58,9 +59,11 @@ input:focus {
   margin: 20px 5px;
   font-size: 20px;
 }
+
 ::placeholder {
   color: white;
-  opacity: 1; /* Firefox */
+  opacity: 1;
+  /* Firefox */
 }
 
 .btn-add {
@@ -85,19 +88,21 @@ input:focus {
 .delete-btn {
   background-color: transparent;
   border: none;
-  
+
   &:hover {
     cursor: pointer;
   }
 }
+
 .edit-btn {
   background-color: transparent;
   border: none;
-  
+
   &:hover {
     cursor: pointer;
   }
 }
+
 .delete-btn svg {
   fill: white;
   height: 20px;
@@ -105,11 +110,12 @@ input:focus {
   margin: 0;
   transition: 300ms;
 }
+
 .delete-btn svg:hover {
   fill: rgb(255, 0, 0);
   height: 25px;
   width: 25px;
-} 
+}
 
 .edit-btn svg {
   fill: white;
@@ -123,17 +129,21 @@ input:focus {
   fill: rgb(0, 117, 25);
   height: 25px;
   width: 25px;
-} 
+}
 
 .show-notes {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Tres columnas con el mismo ancho */
-  gap: 20px; /* Espacio entre las notas */
+  grid-template-columns: repeat(3, 1fr);
+  /* Tres columnas con el mismo ancho */
+  gap: 20px;
+  /* Espacio entre las notas */
 }
 
 .show-notes p {
-  grid-column: 2; /* Placing the element in the second column */
-  grid-row: 2; /* Placing the element in the second row */
+  grid-column: 2;
+  /* Placing the element in the second column */
+  grid-row: 2;
+  /* Placing the element in the second row */
 }
 
 .notes {
@@ -146,11 +156,12 @@ input:focus {
   justify-content: center;
   align-items: center;
   transition: transform 1s ease;
+  word-break: break-all;
 
 }
 
 .text-notes {
-  word-wrap: break-word;
+  word-break: break-all;
   margin-bottom: 15px;
   color: white;
 }
@@ -173,4 +184,3 @@ input:focus {
   border-radius: 5px;
   padding: 10px;
 }
-
