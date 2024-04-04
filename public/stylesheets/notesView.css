@@ -4,7 +4,7 @@ body {
   font-size: 16px;
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.5;
-  background-color: lightseagreen;
+  background-image: url("../images/background.jpg");
   color: white;
 }
 
@@ -13,20 +13,29 @@ h1 {
   color: darkslategrey;
 }
 
-.container {
-  margin-top: 30px;
-  margin-bottom: 30px;
-  width: 30%;
-  margin-left: auto;
-  margin-right: auto;
-  background-color: white;
-  padding: 30px;
+#p{
+  font-family: 'Bungee Spice', sans-serif;
+  font-size: 18px;
+
+}
+label{
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 18px;
 }
 
-.search {
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  width: max-content;
   margin-left: auto;
   margin-right: auto;
-  width: 100%;
+  background-color: rgb(255, 255, 255);
+  padding: 30px;
 }
 
 form {
@@ -34,34 +43,24 @@ form {
 }
 
 input {
-  padding: 15px 10px;
+  padding: 5px 10px;
+  margin: 15px 3px;
+  color: white;
   outline: none;
+  border: none;
+  border-bottom: 1px solid white;
   width: 400px;
+  background-color: rgb(159, 214, 214);
+  transition: 300ms;
 }
 
-.li-container {
-  background-color: white;
-  width: 100%;
-  color: darkslategray;
-  margin-top: 20px;
+input:focus {
+  margin: 20px 5px;
+  font-size: 20px;
 }
-
-ul {
-  padding: 0;
-}
-
-li {
-  list-style: none;
-  background-color: lightgray;
-  border-radius: 10px;
-  margin-top: 15px;
-  display: flex;
-}
-
-li p {
-  margin: 0;
-  padding: 15px;
-  width: 100%;
+::placeholder {
+  color: white;
+  opacity: 1; /* Firefox */
 }
 
 .btn-add {
@@ -83,20 +82,95 @@ li p {
   color: darkslategrey;
 }
 
-.delete-btn {}
+.delete-btn {
+  background-color: transparent;
+  border: none;
+  
+  &:hover {
+    cursor: pointer;
+  }
+}
+.edit-btn {
+  background-color: transparent;
+  border: none;
+  
+  &:hover {
+    cursor: pointer;
+  }
+}
+.delete-btn svg {
+  fill: white;
+  height: 20px;
+  width: 20px;
+  margin: 0;
+  transition: 300ms;
+}
+.delete-btn svg:hover {
+  fill: rgb(255, 0, 0);
+  height: 25px;
+  width: 25px;
+} 
+
+.edit-btn svg {
+  fill: white;
+  height: 20px;
+  width: 20px;
+  margin: 0;
+  transition: 300ms;
+}
+
+.edit-btn svg:hover {
+  fill: rgb(0, 117, 25);
+  height: 25px;
+  width: 25px;
+} 
+
+.show-notes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Tres columnas con el mismo ancho */
+  gap: 20px; /* Espacio entre las notas */
+}
+
+.show-notes p {
+  grid-column: 2; /* Placing the element in the second column */
+  grid-row: 2; /* Placing the element in the second row */
+}
 
 .notes {
-  width: 50%;
-
+  background: rgb(161, 223, 223);
+  border-radius: 5px;
+  padding: 10px;
+  width: 200px;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: transform 1s ease;
+
+}
+
+.text-notes {
+  word-wrap: break-word;
+  margin-bottom: 15px;
+  color: white;
+}
+
+.notes h2 {
+  color: white;
+  text-align: center;
+  word-wrap: break-word;
+  font-family: "Ubuntu", sans-serif;
+  border-bottom: 2px solid white;
+  margin-top: 0;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  margin: 5px;
-  background: darkslategrey;
+  margin: 15px 5px 30px 5px;
+  background: rgb(159, 214, 214);
   border-radius: 5px;
   padding: 10px;
 }
 
-.text-notes {
-  width: 50%;
-  word-wrap: break-word;
-}
