@@ -9,43 +9,41 @@ router.get("/", function (req, res, next) {
 });
 
 router.get("/home", function (req, res, next) {
-  
   res.render("index", { title: "Gestión de la Configuración" }); // Cambia "notes" a "notas"
 });
-
 
 router.get("/notes", async function (req, res, next) {
   const notas = await Note.find(); // Cambia "notes" a "notas"
   res.render("notes", { title: "Notas", notas: notas });
 });
 
-router.post('/registro', async (req, res) => {
+router.post("/registro", async (req, res) => {
   try {
     const { username, password } = req.body;
     const newUser = new User({ username, password });
     await newUser.save();
-    res.status(201).send('Usuario registrado exitosamente');
+    res.status(201).send("Usuario registrado exitosamente");
   } catch (error) {
     res.status(400).send(error.message);
   }
 });
 
 // controlador de inicio de sesión
-router.post('/login', async (req, res) => {
+router.post("/login", async (req, res) => {
   try {
     const { username, password } = req.body;
     const user = await User.findOne({ username, password });
     if (user) {
-      res.redirect('/notes');
+      res.redirect("/notes");
     } else {
-      res.status(401).send('Credenciales inválidas');
+      res.status(401).send("Credenciales inválidas");
     }
   } catch (error) {
     res.status(400).send(error.message);
   }
 });
 
-router.post('/notes', async (req, res) => {
+router.post("/notes", async (req, res) => {
   try {
     const { title, content } = req.body;
     const newNote = new Note({ title, content });
@@ -73,13 +71,15 @@ router.put("/notes/:id", async function (req, res, next) {
       return res.status(404).json({ error: "La nota no se encontró." });
     }
 
-    res.json({ message: "La nota ha sido actualizada exitosamente.", note: updatedNote });
+    res.json({
+      message: "La nota ha sido actualizada exitosamente.",
+      note: updatedNote,
+    });
   } catch (error) {
     console.error("Error:", error.message);
     res.status(500).json({ error: "Hubo un problema al actualizar la nota." });
   }
 });
-
 
 router.delete("/notes/:id", async function (req, res, next) {
   try {

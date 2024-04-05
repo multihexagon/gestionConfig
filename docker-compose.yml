@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  conf:
+    image: conf
+    container_name: conf
+    ports:
+      - '3000:3000'
+    restart: always
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    restart: always
+    volumes:
+       - ./nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - "80:80"
+    depends_on:
+      - conf
