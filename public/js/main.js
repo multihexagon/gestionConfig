@@ -30,7 +30,7 @@ const deleteNote = async (id) => {
       throw new Error("No se pudo eliminar la nota.");
     }
     const data = await response.json();
-    console.log(data.message); 
+    console.log(data.message);
     const noteToDelete = document.querySelector(`.notes[data-id="${id}"]`);
     if (noteToDelete) {
       noteToDelete.remove();
@@ -101,8 +101,14 @@ function attachEventListeners() {
       const noteId = noteContainer.dataset.id; // Obtener el ID de la nota
       const titleElement = noteContainer.querySelector("h2");
       const contentElement = noteContainer.querySelector(".text-notes");
-      const newTitle = prompt("Ingrese el nuevo título:", titleElement.textContent);
-      const newContent = prompt("Ingrese el nuevo contenido:", contentElement.textContent);
+      const newTitle = prompt(
+        "Ingrese el nuevo título:",
+        titleElement.textContent
+      );
+      const newContent = prompt(
+        "Ingrese el nuevo contenido:",
+        contentElement.textContent
+      );
       if (newTitle !== null && newContent !== null) {
         // Actualizar el título y el contenido en el DOM
         titleElement.textContent = newTitle;
