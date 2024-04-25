@@ -8,6 +8,43 @@ body {
   color: white;
 }
 
+#search-word-form {
+
+  display: grid;
+  place-content: center;
+}
+
+.search-word-group {
+  text-align: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 94%;
+
+}
+
+.search-word-group label {
+  color: black;
+}
+
+.search-word-group input {
+  border-radius: 0.5em;
+  width: 100%;
+}
+
+.search-word-group button {
+  border-radius: 0.5em;
+  width: 50%;
+  padding: 5px 15px;
+  border: none;
+  color: white;
+  font-family: Helvetica, sans-serif;
+  background-color: teal;
+  font-size: 1rem;
+  outline: none;
+
+}
+
 h1 {
   text-align: center;
   color: darkslategrey;

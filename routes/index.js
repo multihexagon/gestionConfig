@@ -22,7 +22,8 @@ router.post("/registro", async (req, res) => {
     const { username, password } = req.body;
     const newUser = new User({ username, password });
     await newUser.save();
-    res.status(201).send("Usuario registrado exitosamente");
+
+    res.status(200).send("Usuario registrado exitosamente");
   } catch (error) {
     res.status(400).send(error.message);
   }
@@ -34,8 +35,12 @@ router.post("/login", async (req, res) => {
     const { username, password } = req.body;
     const user = await User.findOne({ username, password });
     if (user) {
-      res.redirect("/notes");
+      console.log("2" + username);
+
+      res.json(user)
+      //.redirect("/notes");
     } else {
+      throw new Error("malo pa");
       res.status(401).send("Credenciales inválidas");
     }
   } catch (error) {
