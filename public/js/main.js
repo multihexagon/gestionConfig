@@ -4,6 +4,7 @@ const addBtn = document.querySelector(".btn-add");
 const empty = document.querySelector(".empty");
 const p = document.querySelector("#p");
 const btnSearch = document.querySelector("#btn-search");
+const wordTo = document.querySelector("#word");
 
 const addNote = async (title, content) => {
   try {
@@ -126,6 +127,20 @@ btnSearch.addEventListener("click", (e) => {
   searchWords();
 });
 
+wordTo.addEventListener("input", (e) => {
+  const counterlbl = document.getElementById("counter");
+  let wcounter = 0;
+  const words = inputNote.value.split(/\s+/);
+  words.forEach((word) => {
+    if (word === wordTo.value) {
+      wcounter++;
+    }
+    return wcounter;
+  });
+
+  counterlbl.textContent = wcounter;
+});
+
 function searchWords() {
   let counter = 0;
   word = inputNote.value;
@@ -138,7 +153,6 @@ function searchWords() {
           .toLocaleLowerCase()
           .includes(word.toLocaleLowerCase())
       ) {
-        console.log(content.textContent);
         counter++;
       }
     });

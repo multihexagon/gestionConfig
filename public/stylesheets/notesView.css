@@ -58,9 +58,12 @@ input {
   border: none;
   border-bottom: 1px solid white;
   width: 400px;
-  background-color: rgb(159, 214, 214);
+  background-color: rgb(86, 125, 159);
   transition: 300ms;
 }
+
+
+
 
 input:focus {
   margin: 20px 5px;
@@ -78,6 +81,15 @@ input:focus {
   display: flex;
   justify-content: center;
   gap: 1em;
+}
+
+.counter-word {
+  position: relative;
+}
+
+#counter {
+  position: absolute;
+  translate: -2em -0.3em;
 }
 
 .btn-add,
@@ -164,7 +176,7 @@ input:focus {
 }
 
 .notes {
-  background: rgb(161, 223, 223);
+  background-color: rgb(86, 125, 159);
   border-radius: 5px;
   padding: 10px;
   width: 200px;
@@ -197,7 +209,8 @@ input:focus {
   flex-direction: column;
   justify-content: space-between;
   margin: 15px 5px 30px 5px;
-  background: rgb(159, 214, 214);
+  background-color: rgb(86, 125, 159);
+
   border-radius: 5px;
   padding: 10px;
 }
