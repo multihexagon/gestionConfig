@@ -3,6 +3,7 @@ const inputNote = document.querySelector("#user-note");
 const addBtn = document.querySelector(".btn-add");
 const empty = document.querySelector(".empty");
 const p = document.querySelector("#p");
+const btnSearch = document.querySelector("#btn-search");
 
 const addNote = async (title, content) => {
   try {
@@ -120,9 +121,38 @@ function attachEventListeners() {
   });
 }
 
+btnSearch.addEventListener("click", (e) => {
+  e.preventDefault();
+  let counter = 0;
+  const word = document.getElementById("search-word").value;
+  const notes = document.querySelectorAll(".notes");
+  notes.forEach((note) => {
+    const title = note.querySelector("h2").textContent;
+    const contents = note.querySelectorAll(".text-notes");
+    contents.forEach((content) => {
+      if (
+        content.textContent
+          .toLocaleLowerCase()
+          .includes(word.toLocaleLowerCase())
+      ) {
+        counter++;
+      }
+    });
+  });
+  if (counter === 0) {
+    Swal.fire({
+      title: "No se encontraron coincidencias",
+    });
+  } else if (counter === 1) {
+    Swal.fire({
+      title: `Hay 1 palabra repetida`,
+    });
+  } else {
+    Swal.fire({
+      title: `Hay ${counter} palabras repetidas`,
+    });
+  }
+});
+
 // Attach initial event listeners
 attachEventListeners();
-
-const searchWord = () => {
-  const word = document.querySelector("#search-word");
-};
