@@ -91,6 +91,8 @@
             name="password"
             id="password-register"
             placeholder=""
+            pattern="^[a-zA-Z]"
+            required
           />
         </div>
         <div class="input-group">
@@ -163,6 +165,17 @@
       $("#sign-in").click(function () {
         $("#register-form").fadeOut("fast");
         $("#login-form").fadeIn("fast");
+      });
+
+      const inputPassword = document.getElementById("password-register");
+
+      inputPassword.addEventListener("input", (e) => {
+        const hasNumbers = /[0-9/]/.test(e.target.value);
+
+        if (hasNumbers) {
+          e.target.value = e.target.value.replace(/[0-9]/, "");
+          return;
+        }
       });
     </script>
   </body>
