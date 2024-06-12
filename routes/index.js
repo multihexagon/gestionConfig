@@ -37,10 +37,9 @@ router.post("/login", async (req, res) => {
     if (user) {
       console.log("2" + username);
 
-      res.json(user)
+      res.json(user);
       //.redirect("/notes");
     } else {
-      throw new Error("malo pa");
       res.status(401).send("Credenciales inválidas");
     }
   } catch (error) {
