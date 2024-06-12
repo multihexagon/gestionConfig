@@ -6,6 +6,34 @@ const p = document.querySelector("#p");
 const btnSearch = document.querySelector("#btn-search");
 const wordTo = document.querySelector("#word");
 
+const notes = document.querySelectorAll(".notes");
+
+const counter = document.querySelector("#counter_words");
+
+notes.forEach((notes) => {
+  notes.addEventListener("click", (e) => {
+    const length = e.target.querySelector(".text-notes").textContent.length;
+
+    console.log(length);
+
+    counter.textContent = length;
+  });
+});
+
+const randomBtn = document.querySelector(".btn-random-word");
+randomBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  fetch("https://random-word-api.herokuapp.com/word?number=1")
+    .then((res) => res.json())
+    .then((word) => {
+      Swal.fire({
+        title: word[0],
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    });
+});
+
 const addNote = async (title, content) => {
   try {
     const response = await fetch("/notes", {
@@ -128,17 +156,7 @@ btnSearch.addEventListener("click", (e) => {
 });
 
 wordTo.addEventListener("input", (e) => {
-  const counterlbl = document.getElementById("counter");
-  let wcounter = 0;
-  const words = inputNote.value.split(/\s+/);
-  words.forEach((word) => {
-    if (word === wordTo.value) {
-      wcounter++;
-    }
-    return wcounter;
-  });
-
-  counterlbl.textContent = wcounter;
+  contarPalabrasRepetidas();
 });
 
 function searchWords() {
@@ -171,5 +189,28 @@ function searchWords() {
     });
   }
 }
-// Attach initial event listeners
+function contarPalabrasRepetidas() {
+  // Capturamos el texto de los labels --> notes
+  
+  let noteText = '';
+  const contents = document.querySelectorAll(".text-notes");
+  contents.forEach(note=>{
+    noteText += ' ' + note.textContent;
+  })
+  const noteWords = noteText.split(' ').filter(word => word !== '');
+
+  const inputText = document.getElementById('word').value;
+
+  const inputWords = inputText.split(' ').filter(word => word !== '');
+
+  let repeatedCount = 0;
+  inputWords.forEach(inputWord => {
+      if (noteWords.includes(inputWord)) {
+          repeatedCount++;
+      }
+  });
+
+  document.getElementById('counter').textContent = repeatedCount;
+}
+
 attachEventListeners();
