@@ -8,6 +8,13 @@ body {
   color: white;
 }
 
+#search-word-form {
+
+  display: grid;
+  place-content: center;
+}
+
+
 h1 {
   text-align: center;
   color: darkslategrey;
@@ -39,6 +46,8 @@ label {
   padding: 30px;
 }
 
+
+
 form {
   display: flex;
 }
@@ -51,8 +60,25 @@ input {
   border: none;
   border-bottom: 1px solid white;
   width: 400px;
-  background-color: rgb(159, 214, 214);
+  background-color: rgb(86, 125, 159);
   transition: 300ms;
+}
+
+
+.functions {
+  display: flex;
+  justify-content: space-between;
+  
+}
+
+.functions label {
+  display: flex;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 18px;
+  color: black;
+  border: 1px solid teal;
+  border-radius: 7.5px;
+  padding: 7.5px;
 }
 
 input:focus {
@@ -66,7 +92,29 @@ input:focus {
   /* Firefox */
 }
 
-.btn-add {
+.buttons {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+}
+
+.counter-word {
+  position: relative;
+}
+.btn-random-word {
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  color: white;
+  background-color: teal;
+  padding: 13px;
+}
+.btn-add,
+#btn-search{
+  border-radius: 5px;
+  cursor: pointer;
   padding: 5px 15px;
   border: none;
   color: white;
@@ -147,7 +195,7 @@ input:focus {
 }
 
 .notes {
-  background: rgb(161, 223, 223);
+  background-color: rgb(86, 125, 159);
   border-radius: 5px;
   padding: 10px;
   width: 200px;
@@ -180,7 +228,8 @@ input:focus {
   flex-direction: column;
   justify-content: space-between;
   margin: 15px 5px 30px 5px;
-  background: rgb(159, 214, 214);
+  background-color: rgb(86, 125, 159);
+
   border-radius: 5px;
   padding: 10px;
 }

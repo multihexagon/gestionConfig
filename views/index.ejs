@@ -8,12 +8,13 @@
       href="https://fonts.googleapis.com/css2?family=Jura:wght@300..700&family=Oswald:wght@200..700&display=swap"
       rel="stylesheet"
     />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
     <div class="form-container" id="login-form">
       <p class="title">Iniciar Sesión</p>
-      <form class="form" action="/login" method="post">
+      <form class="form" id="login">
         <div class="input-group">
           <label for="username">Nombre de Usuario</label>
           <input type="text" name="username" id="username" placeholder="" />
@@ -74,7 +75,7 @@
     </div>
     <div class="form-container" id="register-form" style="display: none">
       <p class="title">Registro</p>
-      <form class="form" action="/registro" method="post">
+      <form class="form" id="registro">
         <div class="input-group">
           <label for="username">Nombre de Usuario</label>
           <input
@@ -113,7 +114,7 @@
       </div>
       <div class="social-icons">
         <button aria-label="Log in with Google" class="icon">
-          <svg
+          <svg 
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 32 32"
             class="w-5 h-5 fill-current"
@@ -148,9 +149,85 @@
       </div>
       <p class="signup">
         ¿Ya tienes una cuenta?
-        <a rel="noopener noreferrer" href="#" id="sign-in">Inicia sesión</a>
+        <a rel="noopener noreferrer" id="sign-in">Inicia sesión</a>
       </p>
     </div>
+    <script>
+      const $1 = (el) => document.querySelector(el);
+
+      $1("#registro").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const formData = Object.fromEntries(new FormData(e.target));
+
+        try {
+          const req = await fetch("/registro", {
+            method: "POST",
+            body: JSON.stringify(formData),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+
+          if (!req.ok) {
+            throw new Error("malo");
+          }
+
+          Swal.fire({
+            title: "CREADO!!",
+            text: "Usuario creado",
+            icon: "success",
+          });
+          $("#login-form").fadeIn("fast");
+          $("#register-form").fadeOut("fast");
+        } catch (e) {
+          console.log(e);
+
+          Swal.fire({
+            title: "Upssss!!",
+            text: "Algo salió mal",
+            icon: "error",
+          });
+        }
+      });
+
+      $1("#login").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const formData = Object.fromEntries(new FormData(e.target));
+
+        try {
+          const req = await fetch("/login", {
+            method: "POST",
+            body: JSON.stringify(formData),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+
+          if (!req.ok) {
+            throw new Error("maloo");
+          }
+
+          const res = await req.json();
+
+          Swal.fire({
+            title: "Bienvenido!!",
+            text: "Que bueno saludarte amigo " + formData.username,
+            icon: "success",
+          });
+
+          setTimeout(() => {
+            window.location.href = "/notes";
+          }, 1000);
+        } catch (e) {
+          console.log(e);
+          Swal.fire({
+            title: "Upssss!!",
+            text: "Algo salió mal",
+            icon: "error",
+          });
+        }
+      });
+    </script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"
       integrity="sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw=="
@@ -162,6 +239,7 @@
         $("#login-form").fadeOut("fast");
         $("#register-form").fadeIn("fast");
       });
+
       $("#sign-in").click(function () {
         $("#register-form").fadeOut("fast");
         $("#login-form").fadeIn("fast");
